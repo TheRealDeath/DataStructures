@@ -1,9 +1,10 @@
 import java.util.Iterator;
+import java.lang.Comparable;
 import java.util.Arrays;
-public abstract class Template<T> implements Iteration<T>
+public abstract class Template<T> implements Iteration<T>, Comparable<T>
 {
 	protected Object[] arr;
-	protected int size, arrSize, current;
+	protected int size, arrSize, current, sum;
 	protected boolean firstIteration;
 	public Template()
 	{
@@ -11,7 +12,10 @@ public abstract class Template<T> implements Iteration<T>
 		size = arrSize = current = 0;
 		arr = new Object[0];
 	}
-	public void sort() {arr.sort();}
+	public int compareTo(Template<T> temp)
+	{
+		return this.sum - temp.sum;
+	}
 	public void resize()
 	{
 		Object[] temp;
@@ -27,15 +31,15 @@ public abstract class Template<T> implements Iteration<T>
 		for(Object x : temp) arr[i++] = x;
 		firstIteration = false;
 	}
-	public int size() {return size;}
 	public boolean hasNext() 
 	{
 		if(current >= size){current = 0;return false;}
 		return current < size;
 	}
+	public int size() {return size;}
 	public Object next() {return arr[current++];}
 	public Iterator<Object> iterator() {return this;}
-
+	public void sort() {arr.sort();}
 	@Override
 	public String toString() {return Arrays.toString(arr);}
 }
