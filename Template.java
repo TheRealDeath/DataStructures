@@ -11,6 +11,7 @@ public abstract class Template<T> implements Iteration<T>
 		size = arrSize = current = 0;
 		arr = new Object[0];
 	}
+	public void sort() {arr.sort();}
 	public void resize()
 	{
 		Object[] temp;
